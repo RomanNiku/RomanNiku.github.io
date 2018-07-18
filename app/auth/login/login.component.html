@@ -1,0 +1,69 @@
+<p class="text-xs-center">Conectați-vă pentru serviciu
+</p>
+<div
+  class="alert alert-{{message.type}}"
+  *ngIf="message.text"
+>
+  {{message.text}}
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div
+    class="form-group"
+    [ngClass]="{'has-error': form.get('email').invalid && form.get('email').touched}"
+  >
+    <label for="email">Email</label>
+    <input
+      type="text"
+      class="form-control underlined"
+      id="email"
+      placeholder="Introduceți adresa de e-mail"
+      formControlName="email"
+    >
+    <span
+      class="form-help-text"
+      *ngIf="form.get('email').invalid && form.get('email').touched "
+    >
+      <span *ngIf="form.get('email')['errors']['required']">E-mailul trebuie completat. </span>
+      <span *ngIf="form.get('email')['errors']['email']">Introduceți e-mailul corect. </span>
+    </span>
+  </div>
+  <div
+    class="form-group"
+    [ngClass]="{'has-error': form.get('password').invalid && form.get('password').touched}"
+  >
+    <label for="password">Parola</label>
+    <input
+      type="password"
+      class="form-control underlined"
+      id="password"
+      placeholder="Parola"
+      formControlName="password"
+    >
+    <span
+      class="form-help-text"
+      *ngIf="form.get('password').invalid && form.get('password').touched "
+    >
+      <span *ngIf="form.get('password')['errors']['required']">Parola trebuie completată. </span>
+      <span *ngIf="form.get('password')['errors']['minlength'] && form.get('password')['errors']['minlength']['requiredLength']">
+        Parola trebuie să fie mai mare
+        {{form.get('password')['errors']['minlength']['requiredLength']}}
+        simboluri. Acum
+        {{form.get('password')['errors']['minlength']['actualLength']}}
+      </span>
+    </span>
+  </div>
+  <div class="form-group">
+    <button
+      type="submit"
+      class="btn btn-block btn-primary"
+      [disabled]="form.invalid"
+    >
+      Intră
+    </button>
+  </div>
+  <div class="form-group">
+    <p class="text-muted text-xs-center">
+      Nu ai cont? <a routerLink="/registration">Înregistrează-te!</a>
+    </p>
+  </div>
+</form>

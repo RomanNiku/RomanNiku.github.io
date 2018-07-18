@@ -1,0 +1,13 @@
+<div class="title-block">
+  <h3 class="title">
+    Pagina diagramei <span class="sparkline bar"></span>
+  </h3>
+</div>
+
+<div *ngIf="!isLoaded" class="text-center">Loading ...</div>
+<div *ngIf="isLoaded">
+  <my-history-chart [data]="chartData"></my-history-chart>
+
+
+</div>
+
